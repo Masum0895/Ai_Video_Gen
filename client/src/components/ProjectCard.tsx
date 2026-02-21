@@ -4,6 +4,8 @@ import { useNavigate } from "react-router-dom"
 
 import { EllipsisIcon, ImageIcon, Loader2Icon, PlaySquareIcon, Share2Icon, Trash2Icon } from "lucide-react";
 import { img } from "framer-motion/client";
+import { GhostButton, PrimaryButton } from "./Buttons";
+import Pricing from "./Pricing";
 
 const ProjectCard = ({gen, setGenerations, forCommunity = false} : {gen: Project, setGenerations: React.Dispatch<React.SetStateAction<Project[]>>, forCommunity?:boolean}) => {
 
@@ -95,6 +97,15 @@ const ProjectCard = ({gen, setGenerations, forCommunity = false} : {gen: Project
                     <div className="mt-3">
                         <div className="text-xs text-gray-300">{gen.userPrompt}</div>
                     </div>
+                )}
+                {/* buttons */}
+                {!forCommunity && (
+                    <div className="mt-3 grid grid-cols-2 gap-3">
+                        <GhostButton className="text-xs justify-center" onClick={()=> {navigate(`/result/${gen.id}`); scrollTo(0,0)}}>View Details</GhostButton>
+                        <PrimaryButton onClick={()=> togglePublish(gen.id)} className="rounded-md">
+                            {gen.isPublished ? 'Unpublish' :'Publish'}
+                        </PrimaryButton>
+                    </div>    
                 )}
             </div>
         </div>
